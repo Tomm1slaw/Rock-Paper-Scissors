@@ -16,9 +16,19 @@ scissors.addEventListener('click', user);
 var loses = 0;
 var wins = 0;
 var games = 0;
-var rounds = 0;
-// var kompresult = 0;
-// var playerresult = 0;
+var rounds;
+
+// function to new game button
+
+function start() {
+    var roundcounter = window.prompt('How many rounds would you like to play?');
+    if (!isNaN(roundcounter) && roundcounter > 0) {
+        rounds = roundcounter;
+        round.innerHTML = 'You have ' + rounds + ' rounds.' + '<br><br>';
+    } else {
+        round.innerHTML = 'Input needs to be a number' + '<br><br>'
+    }
+}
 
 function user() {
 
@@ -45,43 +55,31 @@ function user() {
 
     function compare(player, compchoice) {
         var compchoice = comp();
-        if (player === compchoice) {
-            output.innerHTML = 'It`s a tie!<br>';
+        if (player == compchoice) {
+            output.innerHTML = 'It`s a tie!';
         } else if (player == 'rock') {
             if (compchoice == 'scissors') {
-                rounds++;
-
                 wins++;
-                output.innerHTML = 'You won! computer choice Scissors<br>';
+                output.innerHTML = 'You won! computer choice Scissors';
             } else if (compchoice == 'paper')  {
-                rounds++;
-
                 loses++;
-                output.innerHTML = 'You lost! computer choice Paper<br>';
+                output.innerHTML = 'You lost! computer choice Paper';
             }
         } else if (player == 'paper') {
             if (compchoice == 'rock') {
-                rounds++;
-
                 wins++;
-                output.innerHTML = 'You won! computer choice Rock<br>';
+                output.innerHTML = 'You won! computer choice Rock';
             } else if (compchoice == 'scissors')  {
-                rounds++;
-
                 loses++;
-                output.innerHTML = 'You lost! computer choice Scissors<br>';
+                output.innerHTML = 'You lost! computer choice Scissors';
             }
         } else if (player == 'scissors') {
             if (compchoice == 'paper') {
-                rounds++;
-
                 wins++;
-                output.innerHTML = 'You won! computer choice Paper<br>';
+                output.innerHTML = 'You won! computer choice Paper';
             } else if (compchoice == 'rock')  {
-                rounds++;
-
                 loses++;
-                output.innerHTML = 'You lost! computer choice Rock<br>';
+                output.innerHTML = 'You lost! computer choice Rock';
             }
         }
     }
@@ -90,26 +88,15 @@ function user() {
 
     compare(playerMove, comp);
     games = wins + loses;
-
-    // result.innerHTML = 'User: '+playerMove+ '<br> Computer: '+comp + '<br><br>'; 
-    result.innerHTML = 'You:' + wins + ' - Computer:' + loses + '<br><br> Games played: ' + games + '.';
-
-}
-
-// function to new game button
-
-function start(rounds, games) {
-    var rounds = window.prompt('How many rounds would you like to play?');
-    if (!isNaN(rounds) && rounds > 0) {
-        round.innerHTML = 'You have ' + rounds + ' rounds.' + '<br><br>'
-    } else {
-        round.innerHTML = 'Input needs to be a number' + '<br><br>'
+    if (games == rounds) {
+        gameOver()
+    } else if (games > rounds) {
+        gameOver()
     }
+    result.innerHTML = 'You:' + wins + ' - Computer:' + loses + '<br><br> Games played: ' + games + '.';
 }
 
 function gameOver() {
-    if (games == rounds) {
-        round.innerHTML = 'Game over! <br><br>Finall result: You:' + wins + ' - Computer:' + loses;
-        result.innerHTML = 'You:' + wins + ' - Computer:' + loses + ;
-    }
+    round.innerHTML = 'Game over! <br><br>Finall result: You:' + wins + ' - Computer:' + loses;
+    output.innerHTML = 'Game over, please press the new game button!';
 };
